@@ -1,8 +1,10 @@
 const https = require('https')
+const http = require('http')
 
 module.exports = (url) => {
-  return new Promise((resolve, reject) => {
-    https.get(url, (res) => {
+  const client = url.indexOf('https') === 0 ? https : http
+  return new Promise(async (resolve, reject) => {
+    client.get(url, (res) => {
       const chunks = []
 
       res.on('error', (err) => {
